@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profile Nabil - Fullstack Developer Student">
+    <title>Profile | Nabil - Fullstack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins','sans-serif'], 'inter': ['Inter','sans-serif'] },
+                    colors: {
+                        'dark': { 900:'#0a0a0a', 800:'#121212', 700:'#1a1a1a', 600:'#2d2d2d' },
+                        'neon': { blue:'#00d4ff', purple:'#a855f7', cyan:'#06b6d4' }
+                    },
+                    animation: { 'float':'float 6s ease-in-out infinite' },
+                    keyframes: { float: { '0%,100%':{ transform:'translateY(0px)' }, '50%':{ transform:'translateY(-20px)' } } }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="page-body" class="bg-dark-900 text-white font-poppins overflow-x-hidden" data-theme="dark">
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6">
+            <div class="glass-dark rounded-2xl px-6 py-4 flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold">
+                    <span class="text-white">&lt;</span><span class="text-neon-blue">Dev</span><span class="text-neon-purple">Folio</span><span class="text-white">/&gt;</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Beranda</a>
+                    <a href="#about-me" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">About Me</a>
+                    <a href="#education" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Pendidikan</a>
+                    <a href="#certificates" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Sertifikat</a>
+                    <a href="#my-projects" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Proyek</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 right-0 mt-2 px-6">
+            <div class="glass-dark rounded-2xl p-6 flex flex-col gap-4">
+                <a href="index.html" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Beranda</a>
+                <a href="#about-me" class="mobile-link text-gray-300 hover:text-neon-blue py-2">About Me</a>
+                <a href="#education" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Pendidikan</a>
+                <a href="#certificates" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Sertifikat</a>
+                <a href="#my-projects" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Proyek</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== SECTION 1: ABOUT ME ==================== -->
+    <section id="about-me" class="min-h-screen flex items-center justify-center relative pt-28 pb-20">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-neon-cyan font-medium text-sm uppercase tracking-wider">Profile</span>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2">
+                    About <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">Me</span>
+                </h1>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                <div class="flex justify-center" data-aos="fade-right">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 rounded-3xl blur-3xl animate-pulse"></div>
+                        <div class="relative w-64 h-64 md:w-80 md:h-80 glass rounded-3xl overflow-hidden flex items-center justify-center">
+                            <div class="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-neon-purple/10"></div>
+                            <div class="relative z-10 text-center p-6">
+                                <!-- <svg class="w-28 h-28 mx-auto text-neon-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> -->
+                                 <img src="pp.png" alt="" class="w-28 h-28 mx-auto text-neon-blue mb-4">
+                                <h3 class="text-2xl font-bold text-white">Achmad Nabil</h3>
+                                <p class="text-neon-cyan text-sm mt-1">Fullstack Developer Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <h2 class="text-3xl font-bold mb-6">Halo! Aku <span class="text-neon-blue">Nabil</span> 👋</h2>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Saya adalah pelajar SMK jurusan Teknik Komputer dan Jaringan (TKJ) yang memiliki passion mendalam dalam dunia pemrograman, khususnya Web Development.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Perjalanan saya dimulai dari rasa ingin tahu tentang bagaimana website bekerja, hingga akhirnya memutuskan untuk menjadi seorang Fullstack Developer. Saya percaya bahwa teknologi adalah masa depan.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-neon-blue">3+</div>
+                            <div class="text-xs text-gray-400 mt-1">Proyek Selesai</div>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-neon-purple">2+</div>
+                            <div class="text-xs text-gray-400 mt-1">Sertifikat</div>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-neon-cyan">5+</div>
+                            <div class="text-xs text-gray-400 mt-1">Teknologi</div>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-pink-500">∞</div>
+                            <div class="text-xs text-gray-400 mt-1">Semangat Belajar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 2: EDUCATION TIMELINE ==================== -->
+    <section id="education" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/5 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-neon-cyan font-medium text-sm uppercase tracking-wider">Jenjang Pendidikan</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2">
+                    Riwayat <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">Sekolah</span>
+                </h2>
+            </div>
+            <div class="max-w-3xl mx-auto relative">
+                <!-- Timeline vertical line -->
+                <div class="timeline-line bg-gradient-to-b from-neon-blue via-neon-purple to-neon-cyan"></div>
+
+                <!-- SD -->
+                <div class="relative pl-16 md:pl-0 mb-16" data-aos="fade-up">
+                    <div class="timeline-dot border-neon-blue">
+                        <span class="text-neon-blue text-xs font-bold">1</span>
+                    </div>
+                    <div class="md:ml-[55%]">
+                        <div class="glass rounded-2xl p-6 hover:shadow-lg hover:shadow-neon-blue/10 transition-all duration-300">
+                            <span class="text-xs font-bold text-neon-blue bg-neon-blue/10 px-3 py-1 rounded-full">2015 - 2021</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1">MI ARRAHMAH</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Mempelajari dasar-dasar ilmu pengetahuan dan mempelajari tentang adab dan sopan santun serta akhlakul karimah yang baik.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMP -->
+                <div class="relative pl-16 md:pl-0 mb-16" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot border-neon-purple">
+                        <span class="text-neon-purple text-xs font-bold">2</span>
+                    </div>
+                    <div class="md:mr-[55%]">
+                        <div class="glass rounded-2xl p-6 hover:shadow-lg hover:shadow-neon-purple/10 transition-all duration-300">
+                            <span class="text-xs font-bold text-neon-purple bg-neon-purple/10 px-3 py-1 rounded-full">2021 - 2023</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1">SMP BUDI UTOMO PERAK JOMBANG</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Mulai mengenal lebih dalam tentang komputer dasar dan pembelajarn tingkat lanjutan sesuai Jenjang SMP sederajat.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMK -->
+                <div class="relative pl-16 md:pl-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-dot border-neon-cyan" style="box-shadow: 0 0 20px rgba(6,182,212,0.6);">
+                        <span class="text-neon-cyan text-xs font-bold">3</span>
+                    </div>
+                    <div class="md:ml-[55%]">
+                        <div class="glass rounded-2xl p-6 hover:shadow-lg hover:shadow-neon-cyan/10 transition-all duration-300 border border-neon-cyan/20">
+                            <span class="text-xs font-bold text-neon-cyan bg-neon-cyan/10 px-3 py-1 rounded-full border border-neon-cyan/30">2023 - 2026</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1">SMK BUDI UTOMO - Jurusan TKJ</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Fokus belajar Teknik Komputer & Jaringan, mendalami web development (Laravel, TailwindCSS), networking, dan server administration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 3: CERTIFICATES (CRUD) ==================== -->
+    <section id="certificates" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-neon-purple/5 via-transparent to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-neon-cyan font-medium text-sm uppercase tracking-wider">Penghargaan</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2">
+                    Sertifikat <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-pink-500">Pencapaian</span>
+                </h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Koleksi sertifikat dari pelatihan dan kompetisi</p>
+                <button onclick="openAdminPanel('certificate')" class="mt-6 px-6 py-3 bg-gradient-to-r from-neon-purple to-pink-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-neon-purple/30 transition-all text-sm inline-flex items-center gap-2 btn-shine">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Kelola Sertifikat
+                </button>
+            </div>
+            <div id="certificates-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 4: PROJECTS (CRUD) ==================== -->
+    <section id="my-projects" class="py-20 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-neon-cyan font-medium text-sm uppercase tracking-wider">Portfolio</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2">
+                    Proyek <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">Unggulan</span>
+                </h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Proyek-proyek yang sudah saya kerjain</p>
+                <button onclick="openAdminPanel('project')" class="mt-6 px-6 py-3 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl text-white font-medium hover:shadow-lg hover:shadow-neon-blue/30 transition-all text-sm inline-flex items-center gap-2 btn-shine">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Kelola Proyek
+                </button>
+            </div>
+            <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 <span class="text-neon-blue">Nabil</span>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-[1000] hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div class="glass rounded-2xl p-8 max-w-md w-full mx-4 border border-neon-blue/30 shadow-2xl shadow-neon-blue/10">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-white">🔐 Admin Login</h3>
+                <button onclick="closeAllModals()" class="text-gray-400 hover:text-white transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">Masukkan token rahasia untuk mengakses fitur CRUD.</p>
+            <input type="password" id="token-input" class="w-full bg-dark-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue mb-2 transition-all" placeholder="Masukkan token...">
+            <p id="token-error" class="text-red-400 text-xs mb-4 hidden">Token salah! Coba lagi.</p>
+            <button onclick="verifyToken()" class="w-full py-3 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg transition-all btn-shine">Verifikasi</button>
+        </div>
+    </div>
+
+    <!-- CRUD Form Modal -->
+    <div id="form-modal" class="fixed inset-0 z-[1000] hidden items-center justify-center bg-black/70 backdrop-blur-sm overflow-y-auto py-10">
+        <div class="glass rounded-2xl p-8 max-w-lg w-full mx-4 border border-neon-purple/30 shadow-2xl shadow-neon-purple/10 my-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="form-title" class="text-2xl font-bold text-white">Tambah Data</h3>
+                <button onclick="closeAllModals()" class="text-gray-400 hover:text-white transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <form id="crud-form" onsubmit="submitForm(event)">
+                <input type="hidden" id="item-id">
+                <input type="hidden" id="item-type">
+                <input type="hidden" id="item-image-data">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Judul *</label>
+                    <input type="text" id="item-title" class="w-full bg-dark-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-purple transition-all" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Deskripsi *</label>
+                    <textarea id="item-desc" rows="3" class="w-full bg-dark-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-purple resize-none transition-all" required></textarea>
+                </div>
+
+                <!-- Image Source Toggle -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Gambar / File *</label>
+                    <div class="source-toggle mb-3">
+                        <button type="button" id="btn-upload" class="active" onclick="switchImageSource('upload')">📁 Upload File</button>
+                        <button type="button" id="btn-link" onclick="switchImageSource('link')">🔗 Link / URL</button>
+                    </div>
+
+                    <!-- Upload File Area -->
+                    <div id="upload-area">
+                        <div id="drop-zone" class="upload-zone" onclick="document.getElementById('file-input').click()">
+                            <input type="file" id="file-input" accept=".png,.jpg,.jpeg,.pdf" class="hidden" onchange="handleFileSelect(event)">
+                            <div id="upload-placeholder">
+                                <svg class="w-10 h-10 mx-auto text-neon-purple mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                <p class="text-gray-400 text-sm">Klik atau drag file ke sini</p>
+                                <p class="text-gray-500 text-xs mt-1">PNG, JPG, PDF (max 2MB)</p>
+                            </div>
+                            <div id="upload-preview" class="hidden">
+                                <img id="preview-img" class="file-preview mx-auto" src="" alt="Preview">
+                                <p id="preview-name" class="text-neon-purple text-xs mt-2 font-medium"></p>
+                                <p class="text-gray-500 text-xs mt-1">Klik untuk ganti file</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link/URL Area -->
+                    <div id="link-area" class="hidden">
+                        <input type="text" id="item-image" class="w-full bg-dark-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-purple transition-all" placeholder="https://... atau link Google Drive">
+                        <p class="text-gray-500 text-xs mt-2">Mendukung URL gambar langsung atau link Google Drive</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Tags (pisahkan dengan koma)</label>
+                    <input type="text" id="item-tags" class="w-full bg-dark-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-purple transition-all" placeholder="Laravel, MySQL, Tailwind">
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeAllModals()" class="flex-1 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-all">Batal</button>
+                    <button type="submit" class="flex-1 py-3 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg transition-all btn-shine">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-[2000] hidden">
+        <div class="glass rounded-xl px-6 py-4 border border-neon-blue/30 shadow-2xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span id="toast-msg" class="text-white text-sm font-medium">Berhasil!</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="app.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(function(link) {
+            link.addEventListener('click', function() { document.getElementById('mobile-menu').classList.add('hidden'); });
+        });
+
+        // Smooth scroll for anchor links only
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                var el = document.querySelector(this.getAttribute('href'));
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', function() {
+            var nb = document.getElementById('navbar');
+            if (window.pageYOffset > 80) { nb.classList.add('py-2'); nb.classList.remove('py-4'); }
+            else { nb.classList.add('py-4'); nb.classList.remove('py-2'); }
+        });
+
+        // Particles
+        var pc = document.getElementById('particles');
+        for (var i = 0; i < 20; i++) {
+            var p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random()*100+'%';
+            p.style.animationDuration = (Math.random()*10+10)+'s';
+            p.style.animationDelay = Math.random()*10+'s';
+            p.style.opacity = Math.random()*0.4+0.1;
+            pc.appendChild(p);
+        }
+    </script>
+</body>
+</html>
