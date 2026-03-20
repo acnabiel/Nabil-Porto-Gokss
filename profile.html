@@ -47,18 +47,28 @@
                     <a href="#certificates" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Sertifikat</a>
                     <a href="#my-projects" class="nav-link text-gray-300 hover:text-neon-blue transition-colors text-sm font-medium">Proyek</a>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden text-white p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-white" aria-label="Menu">
+                    <div class="hamburger-animated" id="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 right-0 mt-2 px-6">
-            <div class="glass-dark rounded-2xl p-6 flex flex-col gap-4">
-                <a href="index.html" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Beranda</a>
-                <a href="#about-me" class="mobile-link text-gray-300 hover:text-neon-blue py-2">About Me</a>
-                <a href="#education" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Pendidikan</a>
-                <a href="#certificates" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Sertifikat</a>
-                <a href="#my-projects" class="mobile-link text-gray-300 hover:text-neon-blue py-2">Proyek</a>
+        <!-- Mobile Menu Animated Dropdown -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 mt-2 px-6 mobile-menu-animated hidden">
+            <div class="glass-dark rounded-2xl p-6 flex flex-col gap-4 shadow-xl border border-white/5">
+                <a href="index.html" class="mobile-link text-gray-300 hover:text-neon-blue py-2 flex items-center justify-between border-b border-white/5"><span>Beranda</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                <a href="#about-me" class="mobile-link text-gray-300 hover:text-neon-blue py-2 flex items-center justify-between border-b border-white/5"><span>About Me</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                <a href="#education" class="mobile-link text-gray-300 hover:text-neon-blue py-2 flex items-center justify-between border-b border-white/5"><span>Pendidikan</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                <a href="#certificates" class="mobile-link text-gray-300 hover:text-neon-blue py-2 flex items-center justify-between border-b border-white/5"><span>Sertifikat</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                <a href="#my-projects" class="mobile-link text-gray-300 hover:text-neon-blue py-2 flex items-center justify-between"><span>Proyek</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                <div class="mt-2 flex justify-center">
+                    <button onclick="document.getElementById('page-body').classList.toggle('light')" class="flex items-center gap-2 glass px-4 py-2 rounded-xl text-sm w-full justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg> Change Theme
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -322,11 +332,35 @@
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
 
         // Mobile menu
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+        var hamburgerIcon = document.getElementById('hamburger-icon');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            var isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(function() {
+                    mobileMenu.classList.add('menu-open');
+                    hamburgerIcon.classList.add('is-open');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('menu-open');
+                hamburgerIcon.classList.remove('is-open');
+                setTimeout(function() {
+                    mobileMenu.classList.add('hidden');
+                }, 350);
+            }
         });
+
         document.querySelectorAll('.mobile-link').forEach(function(link) {
-            link.addEventListener('click', function() { document.getElementById('mobile-menu').classList.add('hidden'); });
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('menu-open');
+                hamburgerIcon.classList.remove('is-open');
+                setTimeout(function() {
+                    mobileMenu.classList.add('hidden');
+                }, 350);
+            });
         });
 
         // Smooth scroll for anchor links only
@@ -356,6 +390,52 @@
             p.style.opacity = Math.random()*0.4+0.1;
             pc.appendChild(p);
         }
+        // Active Bottom Nav Menu Tracker
+        var sections = document.querySelectorAll('section');
+        var bottomNavLinks = document.querySelectorAll('.bottom-nav-link');
+        
+        window.addEventListener('scroll', function() {
+            var current = '';
+            sections.forEach(function(section) {
+                var sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            bottomNavLinks.forEach(function(link) {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-bottom-nav-inner">
+            <a href="index.html" class="nav-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Home</span>
+            </a>
+            <a href="#about-me" class="nav-item bottom-nav-link active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <span>About Me</span>
+            </a>
+            <a href="#education" class="nav-item bottom-nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                <span>Pend.</span>
+            </a>
+            <a href="#certificates" class="nav-item bottom-nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                <span>Sertifikat</span>
+            </a>
+            <a href="#my-projects" class="nav-item bottom-nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span>Proyek</span>
+            </a>
+        </div>
+    </nav>
 </body>
 </html>
