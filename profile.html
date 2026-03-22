@@ -84,15 +84,94 @@
             </div>
             <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                 <div class="flex justify-center" data-aos="fade-right">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 rounded-3xl blur-3xl animate-pulse"></div>
-                        <div class="relative w-64 h-64 md:w-80 md:h-80 glass rounded-3xl overflow-hidden flex items-center justify-center">
-                            <div class="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-neon-purple/10"></div>
-                            <div class="relative z-10 text-center p-6">
-                                <!-- <svg class="w-28 h-28 mx-auto text-neon-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> -->
-                                 <img src="pp.png" alt="" class="w-28 h-28 mx-auto text-neon-blue mb-4">
-                                <h3 class="text-2xl font-bold text-white">Achmad Nabil</h3>
-                                <p class="text-neon-cyan text-sm mt-1">Fullstack Developer Student</p>
+                    <!-- ID Card Scene (draggable lanyard system) -->
+                    <div class="id-card-scene" id="id-card-scene">
+                        <!-- SVG dynamic lanyard ropes -->
+                        <svg class="lanyard-svg" id="lanyard-svg" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="lanyardGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#00d4ff"/>
+                                    <stop offset="50%" stop-color="#0097b2"/>
+                                    <stop offset="100%" stop-color="#a855f7"/>
+                                </linearGradient>
+                            </defs>
+                            <path id="lanyard-path-l" stroke="url(#lanyardGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
+                            <path id="lanyard-path-r" stroke="url(#lanyardGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        </svg>
+
+                        <!-- Draggable card assembly -->
+                        <div class="id-card-draggable" id="id-card-draggable">
+                            <!-- Metal clip -->
+                            <div class="lanyard-clip">
+                                <div class="lanyard-clip-inner"></div>
+                            </div>
+                            <!-- The ID Card -->
+                            <div class="id-card" id="id-card">
+                                <!-- Holographic shine overlay -->
+                                <div class="id-card-shine" id="id-card-shine"></div>
+                                <!-- Top color band -->
+                                <div class="id-card-header">
+                                    <div class="id-card-header-pattern"></div>
+                                    <!-- <span class="id-card-badge-label">&lt;DevFolio/&gt;</span> -->
+                                </div>
+                                <!-- Photo -->
+                                <div class="id-card-photo-ring">
+                                    <img src="pp.png" alt="Achmad Nabil" class="id-card-photo" />
+                                </div>
+                                <!-- Info -->
+                                <div class="id-card-info">
+                                    <h3 class="id-card-name">Achmad Nabil</h3>
+                                    <p class="id-card-role">Fullstack Developer Student</p>
+                                    <div class="id-card-divider"></div>
+                                    <p class="id-card-school">SMK Budi Utomo — TKJ</p>
+                                </div>
+                                <!-- Bottom section -->
+                                <div class="id-card-footer">
+                                    <div class="id-card-qr">
+                                        <svg viewBox="0 0 40 40" class="id-card-qr-svg">
+                                            <rect x="0" y="0" width="12" height="12" rx="2" fill="currentColor"/>
+                                            <rect x="14" y="0" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="21" y="0" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="28" y="0" width="12" height="12" rx="2" fill="currentColor"/>
+                                            <rect x="2" y="2" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                            <rect x="30" y="2" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                            <rect x="4" y="4" width="4" height="4" rx="0.5" fill="currentColor"/>
+                                            <rect x="32" y="4" width="4" height="4" rx="0.5" fill="currentColor"/>
+                                            <rect x="0" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="7" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="14" y="7" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="14" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="21" y="7" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="21" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="0" y="21" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="7" y="21" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="14" y="21" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="21" y="21" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="28" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="35" y="14" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="28" y="21" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="0" y="28" width="12" height="12" rx="2" fill="currentColor"/>
+                                            <rect x="2" y="30" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                            <rect x="4" y="32" width="4" height="4" rx="0.5" fill="currentColor"/>
+                                            <rect x="14" y="28" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="21" y="28" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="28" y="28" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="35" y="28" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="14" y="35" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="28" y="35" width="5" height="5" rx="1" fill="currentColor"/>
+                                            <rect x="35" y="35" width="5" height="5" rx="1" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                    <div class="id-card-barcode">
+                                        <div class="barcode-lines">
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                        </div>
+                                        <p class="barcode-text">ID-2026-NABIL-DEV</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -410,6 +489,255 @@
                 }
             });
         });
+
+        // ====== ID Card Draggable Lanyard + Tilt ======
+        (function() {
+            var scene = document.getElementById('id-card-scene');
+            var draggable = document.getElementById('id-card-draggable');
+            var card = document.getElementById('id-card');
+            var shine = document.getElementById('id-card-shine');
+            var svg = document.getElementById('lanyard-svg');
+            var pathL = document.getElementById('lanyard-path-l');
+            var pathR = document.getElementById('lanyard-path-r');
+            if (!scene || !draggable || !card || !pathL || !pathR) return;
+
+            // === State ===
+            var offsetX = 0, offsetY = 0;   // current displacement from rest
+            var velX = 0, velY = 0;         // velocity for spring
+            var isDragging = false;
+            var dragStartX = 0, dragStartY = 0;
+            var dragOffsetX = 0, dragOffsetY = 0;
+            var animFrame = null;
+            var idleFrame = null;
+            var idleTime = 0;
+            var isHovering = false;
+
+            // Spring constants
+            var stiffness = 0.08;
+            var damping = 0.82;
+            var maxDrag = 180; // max px drag distance
+
+            // === Lanyard path calculation ===
+            function updateLanyard(dx, dy) {
+                var sceneRect = scene.getBoundingClientRect();
+                var sceneW = sceneRect.width;
+                var sceneH = sceneRect.height;
+
+                // SVG viewBox matches scene pixel size
+                svg.setAttribute('viewBox', '0 0 ' + sceneW + ' ' + sceneH);
+
+                // Fixed anchor points (where lanyard connects to "neck")
+                var anchorLX = sceneW * 0.22;
+                var anchorRX = sceneW * 0.78;
+                var anchorY = 0;
+
+                // Clip position (center-top of the draggable, accounting for displacement)
+                var clipX = sceneW / 2 + dx;
+                var clipY = 82 + dy; // 82 ≈ margin-top minus some clip offset
+
+                // Adjust for mobile
+                if (window.innerWidth < 768) {
+                    clipY = 62 + dy;
+                }
+
+                // Control points for natural sag/curve
+                // More distance = more sag (droop)
+                var distL = Math.sqrt(Math.pow(clipX - anchorLX, 2) + Math.pow(clipY - anchorY, 2));
+                var distR = Math.sqrt(Math.pow(clipX - anchorRX, 2) + Math.pow(clipY - anchorY, 2));
+                var sagBase = 15;
+                var sagScaleL = sagBase + distL * 0.06;
+                var sagScaleR = sagBase + distR * 0.06;
+
+                var ctrlLX = (anchorLX + clipX) / 2 - sagScaleL * 0.3;
+                var ctrlLY = (anchorY + clipY) / 2 + sagScaleL;
+                var ctrlRX = (anchorRX + clipX) / 2 + sagScaleR * 0.3;
+                var ctrlRY = (anchorY + clipY) / 2 + sagScaleR;
+
+                pathL.setAttribute('d', 'M ' + anchorLX + ',' + anchorY + ' Q ' + ctrlLX + ',' + ctrlLY + ' ' + clipX + ',' + clipY);
+                pathR.setAttribute('d', 'M ' + anchorRX + ',' + anchorY + ' Q ' + ctrlRX + ',' + ctrlRY + ' ' + clipX + ',' + clipY);
+            }
+
+            // === Apply position ===
+            function applyPosition() {
+                draggable.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+                updateLanyard(offsetX, offsetY);
+            }
+
+            // === Initial lanyard draw ===
+            updateLanyard(0, 0);
+            // Redraw on resize
+            window.addEventListener('resize', function() { updateLanyard(offsetX, offsetY); });
+
+            // === Spring animation (on release) ===
+            function springBack() {
+                velX += (0 - offsetX) * stiffness;
+                velY += (0 - offsetY) * stiffness;
+                velX *= damping;
+                velY *= damping;
+                offsetX += velX;
+                offsetY += velY;
+
+                applyPosition();
+
+                // Stop when close enough and slow enough
+                if (Math.abs(offsetX) < 0.3 && Math.abs(offsetY) < 0.3 && Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) {
+                    offsetX = 0; offsetY = 0; velX = 0; velY = 0;
+                    applyPosition();
+                    animFrame = null;
+                    startIdle();
+                    return;
+                }
+                animFrame = requestAnimationFrame(springBack);
+            }
+
+            // === Idle gentle sway ===
+            function idleSway(timestamp) {
+                if (isDragging || animFrame) { idleFrame = null; return; }
+                idleTime += 0.015;
+                var swayX = Math.sin(idleTime * 1.2) * 3;
+                var swayY = Math.sin(idleTime * 0.8 + 0.5) * 1.5;
+                draggable.style.transform = 'translate(' + swayX + 'px, ' + swayY + 'px)';
+                updateLanyard(swayX, swayY);
+                idleFrame = requestAnimationFrame(idleSway);
+            }
+            function startIdle() {
+                if (!idleFrame && !isDragging && !animFrame) {
+                    idleTime = 0;
+                    idleFrame = requestAnimationFrame(idleSway);
+                }
+            }
+            function stopIdle() {
+                if (idleFrame) { cancelAnimationFrame(idleFrame); idleFrame = null; }
+            }
+
+            // Start idle on load
+            setTimeout(startIdle, 500);
+
+            // === Drag: Mouse ===
+            draggable.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                isDragging = true;
+                stopIdle();
+                if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+                draggable.classList.add('is-dragging');
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                dragOffsetX = offsetX;
+                dragOffsetY = offsetY;
+                card.style.transition = 'box-shadow 0.3s ease';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                var dx = e.clientX - dragStartX + dragOffsetX;
+                var dy = e.clientY - dragStartY + dragOffsetY;
+
+                // Clamp max distance
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist > maxDrag) {
+                    dx = dx / dist * maxDrag;
+                    dy = dy / dist * maxDrag;
+                }
+
+                offsetX = dx;
+                offsetY = dy;
+                velX = dx - (offsetX - velX || 0);
+                velY = dy - (offsetY - velY || 0);
+                applyPosition();
+
+                // Slight rotation based on drag direction
+                var rotDeg = dx * 0.08;
+                card.style.transform = 'rotate(' + rotDeg + 'deg)';
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!isDragging) return;
+                isDragging = false;
+                draggable.classList.remove('is-dragging');
+                card.style.transform = '';
+                card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+
+                // Track release velocity
+                velX *= 0.4;
+                velY *= 0.4;
+                animFrame = requestAnimationFrame(springBack);
+            });
+
+            // === Drag: Touch ===
+            draggable.addEventListener('touchstart', function(e) {
+                isDragging = true;
+                stopIdle();
+                if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+                draggable.classList.add('is-dragging');
+                var t = e.touches[0];
+                dragStartX = t.clientX;
+                dragStartY = t.clientY;
+                dragOffsetX = offsetX;
+                dragOffsetY = offsetY;
+                card.style.transition = 'box-shadow 0.3s ease';
+            }, { passive: true });
+
+            document.addEventListener('touchmove', function(e) {
+                if (!isDragging) return;
+                var t = e.touches[0];
+                var dx = t.clientX - dragStartX + dragOffsetX;
+                var dy = t.clientY - dragStartY + dragOffsetY;
+
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist > maxDrag) {
+                    dx = dx / dist * maxDrag;
+                    dy = dy / dist * maxDrag;
+                }
+
+                offsetX = dx;
+                offsetY = dy;
+                applyPosition();
+
+                var rotDeg = dx * 0.08;
+                card.style.transform = 'rotate(' + rotDeg + 'deg)';
+            }, { passive: true });
+
+            document.addEventListener('touchend', function() {
+                if (!isDragging) return;
+                isDragging = false;
+                draggable.classList.remove('is-dragging');
+                card.style.transform = '';
+                card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+                velX *= 0.4;
+                velY *= 0.4;
+                animFrame = requestAnimationFrame(springBack);
+            });
+
+            // === 3D Tilt on hover (when not dragging) ===
+            var maxTilt = 14;
+            card.addEventListener('mouseenter', function() {
+                if (isDragging) return;
+                isHovering = true;
+                card.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease';
+            });
+            card.addEventListener('mousemove', function(e) {
+                if (isDragging || !isHovering) return;
+                var rect = card.getBoundingClientRect();
+                var cx = rect.left + rect.width / 2;
+                var cy = rect.top + rect.height / 2;
+                var dx = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
+                var dy = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
+                card.style.transform = 'rotateX(' + (-dy * maxTilt) + 'deg) rotateY(' + (dx * maxTilt) + 'deg) scale(1.03)';
+
+                if (shine) {
+                    shine.style.setProperty('--shine-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+                    shine.style.setProperty('--shine-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+                }
+            });
+            card.addEventListener('mouseleave', function() {
+                isHovering = false;
+                if (!isDragging) {
+                    card.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease';
+                    card.style.transform = '';
+                }
+            });
+
+        })();
     </script>
     
     <!-- Mobile Bottom Navigation -->

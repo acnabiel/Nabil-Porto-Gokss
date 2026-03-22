@@ -380,3 +380,312 @@ body.light .mobile-bottom-nav-inner {
 }
 body.light .mobile-bottom-nav .nav-item { color: #9ca3af; }
 body.light .mobile-bottom-nav .nav-item.active { color: #00d4ff; background: rgba(0, 212, 255, 0.06); }
+
+/* ============================================
+   ID CARD WITH LANYARD
+   ============================================ */
+
+/* ----- Scene container ----- */
+.id-card-scene {
+    position: relative;
+    width: 320px;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 900px;
+}
+
+/* ----- SVG lanyard ropes ----- */
+.lanyard-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+/* ----- Draggable card assembly ----- */
+.id-card-draggable {
+    position: relative;
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 2;
+    will-change: transform;
+    touch-action: none;
+}
+.id-card-draggable:active {
+    cursor: grabbing;
+}
+.id-card-draggable.is-dragging {
+    cursor: grabbing;
+}
+
+/* ----- Metal clip (on top of card) ----- */
+.lanyard-clip {
+    position: relative;
+    width: 28px;
+    height: 18px;
+    background: linear-gradient(180deg, #c0c0c0, #7a7a7a);
+    border-radius: 4px 4px 6px 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
+    z-index: 6;
+    margin-bottom: -4px;
+}
+.lanyard-clip-inner {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 12px;
+    background: linear-gradient(180deg, #9e9e9e, #6a6a6a);
+    border-radius: 4px 4px 2px 2px;
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+}
+
+/* ----- The Card itself ----- */
+.id-card {
+    position: relative;
+    width: 280px;
+    background: linear-gradient(165deg, #151520 0%, #1a1a2e 50%, #16213e 100%);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 40px rgba(0,212,255,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    z-index: 2;
+}
+.id-card:hover {
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.7),
+        0 0 60px rgba(0,212,255,0.12),
+        0 0 30px rgba(168,85,247,0.08);
+}
+
+/* ----- Holographic shine ----- */
+.id-card-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at var(--shine-x, 50%) var(--shine-y, -20%),
+        rgba(255,255,255,0.12) 0%,
+        rgba(0,212,255,0.06) 30%,
+        transparent 70%
+    );
+    mix-blend-mode: overlay;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.id-card:hover .id-card-shine {
+    opacity: 1;
+}
+
+/* ----- Header band ----- */
+.id-card-header {
+    position: relative;
+    height: 60px;
+    background: linear-gradient(135deg, #00d4ff 0%, #a855f7 60%, #ec4899 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.id-card-header-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 8px,
+            rgba(255,255,255,0.06) 8px,
+            rgba(255,255,255,0.06) 16px
+        );
+}
+.id-card-badge-label {
+    position: relative;
+    z-index: 2;
+    font-family: 'Inter', 'Poppins', monospace;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+
+/* ----- Photo ring ----- */
+.id-card-photo-ring {
+    width: 110px;
+    height: 110px;
+    margin: -30px auto 0;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, #00d4ff, #a855f7, #ec4899, #00d4ff);
+    background-size: 300% 300%;
+    animation: photoRingGlow 4s ease-in-out infinite;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    position: relative;
+    z-index: 3;
+}
+.id-card-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #151520;
+    display: block;
+}
+@keyframes photoRingGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* ----- Info section ----- */
+.id-card-info {
+    text-align: center;
+    padding: 14px 20px 10px;
+}
+.id-card-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
+}
+.id-card-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #00d4ff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+.id-card-divider {
+    width: 50px;
+    height: 2px;
+    margin: 10px auto;
+    background: linear-gradient(90deg, transparent, #a855f7, transparent);
+    border-radius: 2px;
+}
+.id-card-school {
+    font-size: 11px;
+    color: #9ca3af;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ----- Footer (QR + Barcode) ----- */
+.id-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px 18px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 6px;
+}
+.id-card-qr {
+    flex-shrink: 0;
+}
+.id-card-qr-svg {
+    width: 52px;
+    height: 52px;
+    color: rgba(0,212,255,0.5);
+}
+.id-card-barcode {
+    flex: 1;
+    text-align: center;
+}
+.barcode-lines {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    height: 30px;
+}
+.barcode-lines span {
+    display: block;
+    width: 2px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 1px;
+}
+.barcode-lines span:nth-child(odd)  { height: 28px; }
+.barcode-lines span:nth-child(even) { height: 20px; }
+.barcode-lines span:nth-child(3n)   { height: 24px; width: 3px; }
+.barcode-lines span:nth-child(5n)   { height: 16px; }
+.barcode-text {
+    font-family: 'Inter', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.3);
+    margin: 4px 0 0;
+    text-transform: uppercase;
+}
+
+/* ----- Light mode adjustments ----- */
+body.light .id-card {
+    background: linear-gradient(165deg, #f0f4f8 0%, #e8edf5 50%, #dce3f0 100%);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.12),
+        0 0 40px rgba(0,212,255,0.04);
+}
+body.light .id-card-name { color: #0b1220; }
+body.light .id-card-school { color: #6b7280; }
+body.light .id-card-photo { border-color: #f0f4f8; }
+body.light .id-card-qr-svg { color: rgba(0,100,150,0.35); }
+body.light .barcode-lines span { background: rgba(0,0,0,0.15); }
+body.light .barcode-text { color: rgba(0,0,0,0.25); }
+body.light .id-card-divider { background: linear-gradient(90deg, transparent, #a855f7, transparent); }
+body.light .id-card-footer { border-top-color: rgba(0,0,0,0.06); }
+
+/* ----- Mobile responsive ----- */
+@media (max-width: 767px) {
+    .id-card-scene {
+        width: 260px;
+        min-height: 420px;
+    }
+    .id-card-draggable {
+        margin-top: 70px;
+    }
+    .id-card {
+        width: 230px;
+    }
+    .id-card-header { height: 48px; }
+    .id-card-badge-label { font-size: 13px; }
+    .id-card-photo-ring {
+        width: 90px;
+        height: 90px;
+        margin-top: -24px;
+    }
+    .id-card-name { font-size: 17px; }
+    .id-card-role { font-size: 10px; }
+    .id-card-school { font-size: 10px; }
+    .id-card-info { padding: 10px 14px 6px; }
+    .id-card-footer { padding: 8px 12px 14px; gap: 8px; }
+    .id-card-qr-svg { width: 40px; height: 40px; }
+    .barcode-lines { height: 24px; }
+    .barcode-lines span:nth-child(odd) { height: 22px; }
+    .barcode-lines span:nth-child(even) { height: 16px; }
+    .barcode-lines span:nth-child(3n) { height: 20px; }
+    .lanyard-clip { width: 24px; height: 15px; }
+    .lanyard-clip-inner { width: 15px; height: 10px; top: -7px; }
+    .lanyard-svg path { stroke-width: 8px; }
+}
