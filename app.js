@@ -141,6 +141,7 @@ function firebaseUpdate(type, item) {
     if (firebaseReady && item._key) {
         var path = (type === 'project' ? 'projects/' : 'certificates/') + item._key;
         var updateObj = { id: item.id, title: item.title, desc: item.desc, image: item.image, tags: item.tags };
+        if (item.pdfPreview) updateObj.pdfPreview = item.pdfPreview;
         db.ref(path).set(updateObj);
     }
 }
@@ -198,7 +199,13 @@ function buildCard(item, type) {
     var imgSrc = item.image || '';
     var isPdf = imgSrc.indexOf('data:application/pdf') === 0;
     var imgHtml = '';
-    if (isPdf) {
+    if (isPdf && item.pdfPreview) {
+        // Use the rendered PDF preview image
+        imgHtml = '<img src="' + item.pdfPreview + '" alt="' + item.title + '" class="absolute inset-0 w-full h-full object-cover">' +
+            '<div class="absolute top-2 left-2 z-10 flex items-center gap-1 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10">' +
+            '<svg class="w-3.5 h-3.5 text-red-400" fill="currentColor" viewBox="0 0 24 24"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>' +
+            '<span class="text-[10px] text-gray-300 font-medium">PDF</span></div>';
+    } else if (isPdf) {
         imgHtml = '<div class="flex flex-col items-center justify-center h-full"><svg class="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg><span class="text-xs text-gray-400 mt-2">PDF Document</span></div>';
     } else {
         imgHtml = '<img src="' + imgSrc + '" alt="' + item.title + '" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'">';
@@ -259,7 +266,15 @@ function openFormModal(type, item) {
         if (item.image && (item.image.indexOf('data:') === 0)) {
             switchImageSource('upload');
             document.getElementById('item-image-data').value = item.image;
-            showUploadPreview(item.image, 'File tersimpan');
+            // If it's a PDF with a preview, show the preview image
+            if (item.image.indexOf('data:application/pdf') === 0 && item.pdfPreview) {
+                document.getElementById('item-pdf-preview').value = item.pdfPreview;
+                showUploadPreview(item.pdfPreview, 'File tersimpan (PDF)', false);
+            } else if (item.image.indexOf('data:application/pdf') === 0) {
+                showUploadPreview(null, 'File tersimpan (PDF)', true);
+            } else {
+                showUploadPreview(item.image, 'File tersimpan');
+            }
         } else {
             switchImageSource('link');
             var imgInput = document.getElementById('item-image');
@@ -333,6 +348,11 @@ function submitForm(e) {
     }
 
     var obj = { id: Date.now(), title: title, desc: desc, image: image, tags: tags };
+    // If there's a PDF preview image stored, include it
+    var pdfPreviewData = document.getElementById('item-pdf-preview');
+    if (pdfPreviewData && pdfPreviewData.value) {
+        obj.pdfPreview = pdfPreviewData.value;
+    }
     var arr = type === 'project' ? projects : certificates;
 
     if (idVal) {
@@ -441,10 +461,12 @@ function resetUploadState() {
     var preview = document.getElementById('upload-preview');
     var fileInput = document.getElementById('file-input');
     var imageData = document.getElementById('item-image-data');
+    var pdfPreview = document.getElementById('item-pdf-preview');
     if (placeholder) placeholder.classList.remove('hidden');
     if (preview) preview.classList.add('hidden');
     if (fileInput) fileInput.value = '';
     if (imageData) imageData.value = '';
+    if (pdfPreview) pdfPreview.value = '';
 }
 
 function handleFileSelect(e) {
@@ -469,12 +491,58 @@ function processFile(file) {
         var dataUrl = ev.target.result;
         document.getElementById('item-image-data').value = dataUrl;
         if (file.type === 'application/pdf') {
-            showUploadPreview(null, file.name, true);
+            renderPdfPreview(dataUrl, file.name);
         } else {
             showUploadPreview(dataUrl, file.name, false);
         }
     };
     reader.readAsDataURL(file);
+}
+
+// Render PDF first page as image using pdf.js
+function renderPdfPreview(pdfDataUrl, fileName) {
+    if (typeof pdfjsLib === 'undefined') {
+        // Fallback: no pdf.js available, show generic icon
+        showUploadPreview(null, fileName, true);
+        return;
+    }
+
+    // Convert data URL to binary data for pdf.js
+    var pdfData = atob(pdfDataUrl.split(',')[1]);
+    var uint8Array = new Uint8Array(pdfData.length);
+    for (var i = 0; i < pdfData.length; i++) {
+        uint8Array[i] = pdfData.charCodeAt(i);
+    }
+
+    pdfjsLib.getDocument({ data: uint8Array }).promise.then(function(pdf) {
+        // Get the first page
+        pdf.getPage(1).then(function(page) {
+            var scale = 2; // Higher scale = better quality
+            var viewport = page.getViewport({ scale: scale });
+            var canvas = document.getElementById('pdf-render-canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+            page.render(renderContext).promise.then(function() {
+                // Convert canvas to JPEG image data URL
+                var previewDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                // Store the preview image
+                var pdfPreviewInput = document.getElementById('item-pdf-preview');
+                if (pdfPreviewInput) pdfPreviewInput.value = previewDataUrl;
+                // Show the preview image in the upload form
+                showUploadPreview(previewDataUrl, fileName, false);
+            });
+        });
+    }).catch(function(err) {
+        console.error('[PDF Preview] Error rendering PDF:', err);
+        showUploadPreview(null, fileName, true);
+    });
 }
 
 function showUploadPreview(imgSrc, fileName, isPdf) {
